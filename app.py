@@ -4,7 +4,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+<<<<<<< Updated upstream
 st.set_page_config(page_title="Jarvis AI", page_icon="🤖", layout="centered", initial_sidebar_state="collapsed")
+=======
+st.set_page_config(page_title="Jarvis AI", page_icon="🤖",
+                   layout="centered", initial_sidebar_state="collapsed")
+>>>>>>> Stashed changes
 
 st.markdown("""
 <style>
@@ -51,9 +56,18 @@ div[data-testid="column"]:nth-child(1) .stButton > button { background: #0a1628;
 """, unsafe_allow_html=True)
 
 # No-op stubs — cloud has no mic or speakers
+<<<<<<< Updated upstream
 def speak(text): pass
 def listen(): return None
 
+=======
+
+
+def speak(text): pass
+def listen(): return None
+
+
+>>>>>>> Stashed changes
 # Session state
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -91,7 +105,12 @@ if not backend_ok:
 status = st.session_state.status
 orb_class = {"thinking": "thinking", "speaking": "speaking"}.get(status, "")
 dot_class = {"thinking": "thinking", "speaking": "speaking"}.get(status, "")
+<<<<<<< Updated upstream
 status_text = {"idle": "STANDBY", "thinking": "PROCESSING", "speaking": "RESPONDING"}.get(status, "STANDBY")
+=======
+status_text = {"idle": "STANDBY", "thinking": "PROCESSING",
+               "speaking": "RESPONDING"}.get(status, "STANDBY")
+>>>>>>> Stashed changes
 
 st.markdown(f"""
 <div class="orb-container"><div class="orb {orb_class}"></div></div>
@@ -103,7 +122,12 @@ st.markdown('<div class="chat-container">', unsafe_allow_html=True)
 for msg in st.session_state.messages:
     role = msg["role"]
     label = "YOU" if role == "user" else "JARVIS"
+<<<<<<< Updated upstream
     st.markdown(f'<div class="msg-row {role}"><div class="bubble {role}"><div class="bubble-label">{label}</div>{msg["content"]}</div></div>', unsafe_allow_html=True)
+=======
+    st.markdown(
+        f'<div class="msg-row {role}"><div class="bubble {role}"><div class="bubble-label">{label}</div>{msg["content"]}</div></div>', unsafe_allow_html=True)
+>>>>>>> Stashed changes
 st.markdown('</div>', unsafe_allow_html=True)
 st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
@@ -117,29 +141,45 @@ with col2:
         st.rerun()
 
 # Text input
+<<<<<<< Updated upstream
 text_input = st.text_input("TYPE YOUR MESSAGE", placeholder="Ask Jarvis anything and press Enter...", key="text_input")
 
 # Process input
+=======
+text_input = st.text_input(
+    "TYPE YOUR MESSAGE", placeholder="Ask Jarvis anything and press Enter...", key="text_input")
+
+# Process input
+
+
+>>>>>>> Stashed changes
 def process_input(user_text):
     if not user_text:
         return
     st.session_state.messages.append({"role": "user", "content": user_text})
     reminder_resp = parse_and_set_reminder(user_text)
     if reminder_resp:
-        st.session_state.messages.append({"role": "assistant", "content": reminder_resp})
+        st.session_state.messages.append(
+            {"role": "assistant", "content": reminder_resp})
         st.session_state.reminders.append(user_text)
         st.session_state.status = "idle"
         return
     st.session_state.status = "thinking"
     try:
         reply = chat(user_text)
-        st.session_state.messages.append({"role": "assistant", "content": reply})
+        st.session_state.messages.append(
+            {"role": "assistant", "content": reply})
         st.session_state.status = "speaking"
     except Exception as e:
-        st.session_state.messages.append({"role": "assistant", "content": f"Error: {str(e)}"})
+        st.session_state.messages.append(
+            {"role": "assistant", "content": f"Error: {str(e)}"})
     finally:
         st.session_state.status = "idle"
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 if text_input:
     process_input(text_input)
     st.rerun()
@@ -149,4 +189,9 @@ if st.session_state.reminders:
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown('<p style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:#3a7bd5;letter-spacing:0.1em;">ACTIVE REMINDERS</p>', unsafe_allow_html=True)
     for r in st.session_state.reminders:
+<<<<<<< Updated upstream
         st.markdown(f'<span class="reminder-pill">⏰ {r}</span>', unsafe_allow_html=True)
+=======
+        st.markdown(
+            f'<span class="reminder-pill">⏰ {r}</span>', unsafe_allow_html=True)
+>>>>>>> Stashed changes

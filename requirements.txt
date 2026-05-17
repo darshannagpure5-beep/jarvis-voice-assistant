@@ -1,6 +1,5 @@
-anthropic
+groq
 SpeechRecognition
-pyaudio
-pyttsx3
+streamlit
 schedule
 python-dotenv
