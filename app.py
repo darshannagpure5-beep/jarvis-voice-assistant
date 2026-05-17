@@ -140,7 +140,8 @@ def process_input(user_text):
     finally:
         st.session_state.status = "idle"
 
-if text_input:
+if text_input and text_input != st.session_state.get("last_input", ""):
+    st.session_state.last_input = text_input
     process_input(text_input)
     st.rerun()
 
